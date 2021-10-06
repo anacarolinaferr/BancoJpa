@@ -1,4 +1,4 @@
-package Util;
+package br.com.jpaBanco.Util;
 
 import javax.persistence.EntityManager;
 import javax.persistence.EntityManagerFactory;

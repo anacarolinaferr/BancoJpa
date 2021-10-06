@@ -1,4 +1,4 @@
-package dao;
+package br.com.jpaBanco.dao;
 
 import java.math.BigDecimal;
 import java.time.LocalDate;
@@ -7,8 +7,9 @@ import java.util.List;
 import javax.persistence.EntityManager;
 import javax.persistence.TypedQuery;
 
-import Util.JPAUtil;
-import entity.Venda;
+import br.com.jpaBanco.Util.JPAUtil;
+import br.com.jpaBanco.entity.FormaPagamento;
+import br.com.jpaBanco.entity.Venda;
 
 public class VendaPersistence {
 
@@ -41,7 +42,7 @@ public class VendaPersistence {
         em.getTransaction().begin();
         Venda vendaParaSerAtualizada = em.find(Venda.class, venda.getId());
         vendaParaSerAtualizada.setValorTotal(new BigDecimal(5000));
-        vendaParaSerAtualizada.setFormaPagamento("A VISTA");
+        vendaParaSerAtualizada.setFormaPagamento(FormaPagamento.A_VISTA);
         em.getTransaction().commit();
     }
 
@@ -50,23 +51,5 @@ public class VendaPersistence {
         Venda v = em.find(Venda.class, id); //garantindo que o objeto v esteja no estado managed
         em.remove(v);
         em.getTransaction().commit();
-    }
-
-    public static void main(String[] args) {
-        VendaPersistence vendaPersistence = new VendaPersistence();
-
-        //vendaPersistence.insere(new Venda(LocalDate.now(), new BigDecimal(2000), "A PRAZO"));
-
-//		List<Venda> lista = vendaPersistence.lista();
-//		lista.forEach(v -> System.out.println(v.getData().toString().concat("  " + v.getValorTotal())));
-
-//		Venda v = vendaPersistence.get(2L);
-//		System.out.println(v.getData().toString().concat("  " + v.getValorTotal()));
-
-//		Venda venda = new Venda(3L, LocalDate.now(), new BigDecimal(5000), "A PRAZO");
-//		vendaPersistence.atualiza(venda);
-
-        vendaPersistence.deleta(4L);
-
     }
 }
